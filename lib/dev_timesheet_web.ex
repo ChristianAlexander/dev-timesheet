@@ -95,6 +95,12 @@ defmodule DevTimesheetWeb do
     end
   end
 
+  def json do
+    quote do
+      unquote(verified_routes())
+    end
+  end
+
   def verified_routes do
     quote do
       use Phoenix.VerifiedRoutes,

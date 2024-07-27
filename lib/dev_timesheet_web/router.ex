@@ -17,7 +17,14 @@ defmodule DevTimesheetWeb.Router do
   scope "/", DevTimesheetWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    get "/", TimesheetController, :index
+    get "/timesheets/export", TimesheetController, :export
+  end
+
+  scope "/api", DevTimesheetWeb do
+    pipe_through :api
+
+    get "/timesheets", TimesheetController, :index
   end
 
   # Other scopes may use custom stacks.
