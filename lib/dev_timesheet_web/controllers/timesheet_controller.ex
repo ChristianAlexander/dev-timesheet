@@ -111,10 +111,13 @@ defmodule DevTimesheetWeb.TimesheetController do
     stream
     |> Stream.map(&format_timesheet_entry/1)
     |> CSV.dump_to_stream()
-    |> Enum.reduce(conn, fn line, conn ->
-      {:ok, conn} = chunk(conn, line)
-
-      conn
+    |> Enum.reduce_while(conn, fn line, conn ->
+      case chunk(conn, line) do
+        {:ok, conn} ->
+          {:cont, conn}
+        {:error, "closed"} ->
+          {:halt, conn}
+      end
     end)
   end
 
