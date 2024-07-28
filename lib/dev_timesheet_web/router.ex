@@ -19,6 +19,7 @@ defmodule DevTimesheetWeb.Router do
 
     get "/", TimesheetController, :index
     get "/timesheets/export", TimesheetController, :export
+    get "/timesheets/export-stream", TimesheetController, :export_stream
   end
 
   scope "/api", DevTimesheetWeb do
