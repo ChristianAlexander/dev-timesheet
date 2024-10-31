@@ -92,7 +92,7 @@ defmodule DevTimesheetWeb.TimesheetController do
               cursor: cursor
             })
 
-          if length(entries) < batch_size do
+          if Enum.empty?(entries) do
             {:halt, entries}
           else
             {entries, List.last(entries).id}
